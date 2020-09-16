@@ -1,0 +1,106 @@
+version: '3.7'
+
+services:
+        users:
+                build: ./users
+                # ports:
+                #         - "85:80"
+                environment:
+                        POSTGRES_PASSWORD: password
+                        POSTGRES_USER: user123
+                        POSTGRES_DB: user_database
+                        POSTGRES_HOST: users_db
+
+                        JWT_SECRET: foobar
+                depends_on:
+                        - users_db
+        users_db:
+                image: postgres
+                restart: always
+                environment:
+                        POSTGRES_PASSWORD: password
+                        POSTGRES_USER: user123
+                        POSTGRES_DB: user_database
+
+
+        items:
+                build: ./items
+                # ports:
+                #         - "81:80"
+                environment:
+                        POSTGRES_PASSWORD: password
+                        POSTGRES_USER: user123
+                        POSTGRES_DB: item_database
+                        POSTGRES_HOST: items_db
+
+                        JWT_SECRET: foobar
+                depends_on:
+                        - items_db
+        items_db:
+                image: postgres
+                restart: always
+                environment:
+                        POSTGRES_PASSWORD: password
+                        POSTGRES_USER: user123
+                        POSTGRES_DB: item_database
+
+
+        ratings:
+                build: ./ratings
+                # ports:
+                #         - "82:80"
+                environment:
+                        POSTGRES_PASSWORD: password
+                        POSTGRES_USER: user123
+                        POSTGRES_DB: ratings_database
+                        POSTGRES_HOST: ratings_db
+                        
+                        RABBITMQ_HOST: message-broker
+
+
+                        JWT_SECRET: foobar
+                depends_on:
+                        - ratings_db
+                        - message-broker
+        ratings_db:
+                image: postgres
+                restart: always
+                environment:
+                        POSTGRES_PASSWORD: password
+                        POSTGRES_USER: user123
+                        POSTGRES_DB: ratings_database
+
+        message-broker:
+                image: "rabbitmq:3.6.14-management"
+                # ports:
+                #         - 5672:5672
+                #         - 15672:15672
+
+        recommendations_worker:
+                build: ./recommendations_worker
+                environment:
+                        RABBITMQ_HOST: message-broker
+                depends_on:
+                        - message-broker
+        
+        recommendations:
+                build: ./recommendations
+                # ports:
+                #         - "83:80"
+                environment:
+                        JWT_SECRET: foobar
+                depends_on:
+                        - ratings
+                        - items
+                        
+        front:
+                build: ./front
+                ports:
+                        - "80:80"
+                environment:
+                        SESSION_SECRET: _5#y2L"F4Q8z\n\xec]/
+                depends_on:
+                        - recommendations
+                        - ratings
+                        - items
+                        - users
