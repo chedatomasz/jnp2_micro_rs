@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendations
+  labels:
+    app: recommendations
+spec:
+  selector:
+    matchLabels:
+      app: recommendations
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: recommendations
+    spec:
+      containers:
+      - name: recommendations
+        image: //gcr recommendations
+        ports:
+        - containerPort: 80
+        env:
+            - name: JWT_SECRET
+              value: foobar

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ratings_db
+  labels:
+    app: ratings-db
+spec:
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: ratings-db

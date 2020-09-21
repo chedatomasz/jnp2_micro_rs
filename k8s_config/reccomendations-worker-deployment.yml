@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendations-worker
+  labels:
+    app: recommendations-worker
+spec:
+  selector:
+    matchLabels:
+      app: recommendations-worker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: recommendations-worker
+    spec:
+      containers:
+      - name: items
+        image: //gcr reccomendationsworker
+        env:
+            - name: RABBITMQ_HOST
+              value: message-broker

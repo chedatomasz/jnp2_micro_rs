@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: items-db
+  labels:
+    app: items-db
+spec:
+  selector:
+    matchLabels:
+      app: items-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: items-db
+    spec:
+      containers:
+      - name: items-db
+        image: postgres
+        ports:
+        - containerPort: 5432
+        env:
+          - name: POSTGRES_PASSWORD
+            value: password
+          - name: POSTGRES_USER
+            value: user123
+          - name: POSTGRES_DB
+            value: item_database

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: items
+  labels:
+    app: items
+spec:
+  selector:
+    matchLabels:
+      app: items
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: items
+    spec:
+      containers:
+      - name: items
+        image: //gcr items
+        ports:
+        - containerPort: 80
+        env:
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_USER
+              value: user123
+            - name: POSTGRES_DB
+              value: item_database
+            - name: POSTGRES_HOST
+              value: items_db
+            - name: JWT_SECRET
+              value: foobar
