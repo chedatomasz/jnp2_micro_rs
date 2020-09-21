@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ratings
-        image: //gcr ratings
+        image: gcr.io/jnp2-micrors/ratings
         ports:
         - containerPort: 80
         env:

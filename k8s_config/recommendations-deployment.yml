@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: recommendations
-        image: //gcr recommendations
+        image: gcr.io/jnp2-micrors/recommendations
         ports:
         - containerPort: 80
         env:

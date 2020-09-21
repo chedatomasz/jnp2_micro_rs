@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: items
-        image: //gcr reccomendationsworker
+        image: gcr.io/jnp2-micrors/recommendations-worker
         env:
             - name: RABBITMQ_HOST
               value: message-broker

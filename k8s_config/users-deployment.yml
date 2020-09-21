@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: users
-        image: //gcr users
+        image: gcr.io/jnp2-micrors/users
         ports:
         - containerPort: 80
         env:
