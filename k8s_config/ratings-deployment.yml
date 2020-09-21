@@ -27,7 +27,7 @@ spec:
             - name: POSTGRES_DB
               value: ratings_database
             - name: POSTGRES_HOST
-              value: ratings_db
+              value: ratings-db
             - name: JWT_SECRET
               value: foobar
             - name: RABBITMQ_HOST

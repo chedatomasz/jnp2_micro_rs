@@ -27,6 +27,6 @@ spec:
             - name: POSTGRES_DB
               value: user_database
             - name: POSTGRES_HOST
-              value: users_db
+              value: users-db
             - name: JWT_SECRET
               value: foobar
