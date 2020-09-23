@@ -112,7 +112,7 @@ def make_item():
             "name": name,
             "description": description
         }
-        reply = requests.post('http://items/api/v1.0/create_item', json = payload)
+        reply = requests.post('http://items/api/v1.0/add_item', json = payload)
         return redirect(url_for('index'))
     return '''
         <h1> Create item </h1>
