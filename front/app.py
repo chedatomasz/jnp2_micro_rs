@@ -80,7 +80,10 @@ def see_item(item_id):
 @app.route('/items', methods=['GET'])
 def see_items():
     items = requests.get('http://items/api/v1.0/all_items')
-    return str(items.json())
+    rows = ['''<a href='/item/{}'> Item {} </a> <br>'''.format(item_id, item_id) for item_id in items.json()]
+
+
+    return ' '.join(rows)
 
 @app.route('/create_account', methods=['GET', 'POST'])
 def make_account():
